@@ -2,12 +2,17 @@ package com.example.reporting.service;
 
 import java.util.HashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.example.reporting.mode.Employee;
 
 @Service
 public class EmployeeService {
+
+    private static final Logger log = LogManager.getLogger(EmployeeService.class);
+
 
     final HashMap<Integer, Employee> employeeMap = new HashMap<>();
 
@@ -19,6 +24,7 @@ public class EmployeeService {
     }
 
     public String deleteEmployee(Integer id) {
+        log.info("Employee Id : {}", id );
         if (!employeeMap.containsKey(id)) {
             throw new RuntimeException("Employee not found");
         }
