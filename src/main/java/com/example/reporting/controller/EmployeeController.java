@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.reporting.mode.Employee;
+import com.example.reporting.model.EmployeeDetails;
 import com.example.reporting.service.EmployeeService;
 
 import lombok.extern.log4j.Log4j2;
@@ -30,7 +30,7 @@ public class EmployeeController {
      * @throws RuntimeException when the employee with the given ID is not found.
      */
     @GetMapping("/employee/{id}")
-    public Employee getEmployee(@PathVariable("id") Integer id) {
+    public EmployeeDetails getEmployee(@PathVariable("id") Integer id) {
         log.info("EmployeeController.getEmployee");
         return employeeService.getEmployee(id);
     }
@@ -54,7 +54,7 @@ public class EmployeeController {
      * @return Employee This returns the newly created employee object.
      */
     @PostMapping("/employee")
-    public Employee createEmployee(@RequestBody Employee employee) {
+    public EmployeeDetails createEmployee(@RequestBody EmployeeDetails employee) {
         log.info("EmployeeController.createEmployee : {}", employee);
         return employeeService.createEmployee(employee);
     }
@@ -68,7 +68,7 @@ public class EmployeeController {
      * @throws RuntimeException when the employee with the given ID is not found.
      */
     @PutMapping("/employee/{id}")
-    public Employee updateEmployee(@PathVariable("id") Integer id, @RequestBody Employee employee) {
+    public EmployeeDetails updateEmployee(@PathVariable("id") Integer id, @RequestBody EmployeeDetails employee) {
         return employeeService.updateEmployee(id, employee);
     }
 
