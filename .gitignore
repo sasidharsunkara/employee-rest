@@ -1,5 +1,9 @@
 HELP.md
+ReadMe.txt
 target/
+logs/
+.mvn
+maven*
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

@@ -1,4 +1,4 @@
-package com.example.reporting.mode;
+package com.example.reporting.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,10 +7,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Employee {
+public class DepartmentDetails {
     private int id;
     private String name;
-    private String email;
-    private String department;
-    
+    private String location;
 }

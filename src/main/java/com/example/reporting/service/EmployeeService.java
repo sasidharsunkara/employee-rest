@@ -1,6 +1,7 @@
 package com.example.reporting.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,12 +43,12 @@ public class EmployeeService {
         return updatedEmployee;
     }
 
-    public String deleteEmployee(Integer id) {
-        log.info("Employee Id : {}", id );
-        if (!employeeMap.containsKey(id)) {
-            throw new RuntimeException("Employee not found");
-        }
-        employeeMap.remove(id);
+    public String deleteEmployee(List<Integer> ids) {
+        log.info("Employee Id : {}", ids );
+        // if (!employeeMap.containsKey(id)) {
+        //     throw new RuntimeException("Employee not found");
+        // }
+        // employeeMap.remove(id);
         return "Employee deleted successfully";
     }
 

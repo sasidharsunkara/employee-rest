@@ -1,5 +1,8 @@
 package com.example.reporting.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,9 +45,22 @@ public class EmployeeController {
      * @return String This returns a success message after deletion.
      * @throws RuntimeException when the employee with the given ID is not found.
      */
+    @DeleteMapping("/employee/{id}")
+    public String deleteEmployee(@PathVariable("id") Integer id) {
+        return employeeService.deleteEmployee(Arrays.asList(id));
+    }
+
+
+    /**
+     * This method is used to delete an Employee object by its ID.
+     * 
+     * @param id This is the ID of the employee to be deleted.
+     * @return String This returns a success message after deletion.
+     * @throws RuntimeException when the employee with the given ID is not found.
+     */
     @DeleteMapping("/employee")
-    public String deleteEmployee(@RequestParam("id") Integer id) {
-        return employeeService.deleteEmployee(id);
+    public String deleteEmployee(@RequestParam("id") List<Integer> ids) {
+        return employeeService.deleteEmployee(ids);
     }
 
     /**
