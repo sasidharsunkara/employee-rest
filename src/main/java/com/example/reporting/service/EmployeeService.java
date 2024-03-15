@@ -31,6 +31,7 @@ public class EmployeeService {
     final HashMap<Integer, EmployeeDetails> employeeMap = new HashMap<>();
 
     public EmployeeDetails createEmployee(EmployeeDetails employeeDetails) {
+        
         long departmentId = employeeDetails.getDepartmentId();
         Department department = departmentRepository.findById(departmentId).orElse(null);
         if(department == null){
@@ -40,7 +41,7 @@ public class EmployeeService {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDetails, employee);
         employee.setEmailAddress(employeeDetails.getEmail());
-        
+
         employee.setDepartment(department);
         Employee savedEmployee = employeeRepository.save(employee);
 

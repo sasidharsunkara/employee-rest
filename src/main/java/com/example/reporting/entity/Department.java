@@ -24,7 +24,7 @@ public class Department {
 
     private String location;
 
-    @OneToMany(mappedBy = "department")
-    private List<Employee> employees;
+    // @OneToMany(mappedBy = "department")
+    // private List<Employee> employees;
     
 }
