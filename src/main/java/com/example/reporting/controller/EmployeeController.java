@@ -84,8 +84,13 @@ public class EmployeeController {
      * @throws RuntimeException when the employee with the given ID is not found.
      */
     @PutMapping("/employee/{id}")
-    public EmployeeDetails updateEmployee(@PathVariable("id") Integer id, @RequestBody EmployeeDetails employee) {
+    public EmployeeDetails updateEmployee(@PathVariable("id") Long id, @RequestBody EmployeeDetails employee) {
         return employeeService.updateEmployee(id, employee);
+    }
+
+    @DeleteMapping("/employee/department/{id}")
+    public String deleteEmployeesByDepartment(@PathVariable("id") Long departmentId) {
+        return employeeService.deleteEmployeeByDepartment(departmentId);
     }
 
 }

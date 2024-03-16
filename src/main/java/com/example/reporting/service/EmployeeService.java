@@ -16,6 +16,9 @@ import com.example.reporting.model.EmployeeDetails;
 import com.example.reporting.repository.DepartmentRepository;
 import com.example.reporting.repository.EmployeeRepository;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Service
 public class EmployeeService {
 
@@ -28,7 +31,7 @@ public class EmployeeService {
     private DepartmentRepository departmentRepository;
 
 
-    final HashMap<Integer, EmployeeDetails> employeeMap = new HashMap<>();
+    final HashMap<Long, EmployeeDetails> employeeMap = new HashMap<>();
 
     public EmployeeDetails createEmployee(EmployeeDetails employeeDetails) {
         
@@ -74,13 +77,18 @@ public class EmployeeService {
         throw new RuntimeException("Employee not found");
     }
 
-    public EmployeeDetails updateEmployee(Integer id, EmployeeDetails employee) {
+    public EmployeeDetails updateEmployee(Long id, EmployeeDetails employee) {
         if (employeeMap.containsKey(id)) {
             employee.setId(id);
             employeeMap.put(id, employee);
             return employeeMap.get(id);
         }
         throw new RuntimeException("Employee not found");
+    }
 
+    public String deleteEmployeeByDepartment(Long departmentId) {
+        log.info("Deleting the employees by departmentId : {}", departmentId);
+        employeeRepository.deleteEmployeesByDepartmentId(departmentId);
+        return "Employees deleted successfully";
     }
 }
