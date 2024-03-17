@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.reporting.entity.Department;
 import com.example.reporting.entity.Employee;
+import com.example.reporting.exception.EmployeeAppException;
+import com.example.reporting.exception.EmployeeExceptionEnum;
 import com.example.reporting.model.DepartmentDetails;
 import com.example.reporting.model.EmployeeDetails;
 import com.example.reporting.repository.DepartmentRepository;
@@ -30,14 +32,13 @@ public class EmployeeService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-
     final HashMap<Long, EmployeeDetails> employeeMap = new HashMap<>();
 
     public EmployeeDetails createEmployee(EmployeeDetails employeeDetails) {
-        
+
         long departmentId = employeeDetails.getDepartmentId();
         Department department = departmentRepository.findById(departmentId).orElse(null);
-        if(department == null){
+        if (department == null) {
             throw new RuntimeException("Invalid department Id");
         }
 
@@ -55,26 +56,26 @@ public class EmployeeService {
         updatedEmployee.setEmail(savedEmployee.getEmailAddress());
 
         DepartmentDetails departmentDetails = new DepartmentDetails();
-        BeanUtils.copyProperties( department, departmentDetails);
+        BeanUtils.copyProperties(department, departmentDetails);
 
         updatedEmployee.setDepartmentDetails(departmentDetails);
         return updatedEmployee;
     }
 
-    public String deleteEmployee(List<Integer> ids) {
-        log.info("Employee Id : {}", ids );
-        // if (!employeeMap.containsKey(id)) {
-        //     throw new RuntimeException("Employee not found");
-        // }
-        // employeeMap.remove(id);
+    public String deleteEmployee(List<Long> ids) {
+        log.info("Employee Id : {}", ids);
+        employeeRepository.deleteAllById(ids);
         return "Employee deleted successfully";
     }
 
-    public EmployeeDetails getEmployee(Integer id) {
-        if (employeeMap.containsKey(id)) {
-            return employeeMap.get(id);
+    public EmployeeDetails getEmployee(Long id) {
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        if (employee == null) {
+            throw new EmployeeAppException(EmployeeExceptionEnum.INVALID_EMPLOYEE_ID, null, null);
         }
-        throw new RuntimeException("Employee not found");
+        EmployeeDetails employeeDetails = new EmployeeDetails();
+        BeanUtils.copyProperties(employee, employeeDetails);
+        return employeeDetails;
     }
 
     public EmployeeDetails updateEmployee(Long id, EmployeeDetails employee) {

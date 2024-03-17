@@ -33,7 +33,7 @@ public class EmployeeController {
      * @throws RuntimeException when the employee with the given ID is not found.
      */
     @GetMapping("/employee/{id}")
-    public EmployeeDetails getEmployee(@PathVariable("id") Integer id) {
+    public EmployeeDetails getEmployee(@PathVariable("id") Long id) {
         log.info("EmployeeController.getEmployee");
         return employeeService.getEmployee(id);
     }
@@ -46,7 +46,7 @@ public class EmployeeController {
      * @throws RuntimeException when the employee with the given ID is not found.
      */
     @DeleteMapping("/employee/{id}")
-    public String deleteEmployee(@PathVariable("id") Integer id) {
+    public String deleteEmployee(@PathVariable("id") Long id) {
         return employeeService.deleteEmployee(Arrays.asList(id));
     }
 
@@ -59,7 +59,7 @@ public class EmployeeController {
      * @throws RuntimeException when the employee with the given ID is not found.
      */
     @DeleteMapping("/employee")
-    public String deleteEmployee(@RequestParam("id") List<Integer> ids) {
+    public String deleteEmployee(@RequestParam("id") List<Long> ids) {
         return employeeService.deleteEmployee(ids);
     }
 
