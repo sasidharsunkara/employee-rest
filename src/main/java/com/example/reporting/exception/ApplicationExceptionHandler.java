@@ -11,7 +11,8 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(EmployeeAppException.class)
     public ResponseEntity<?> handleEmployeeAppException(EmployeeAppException e) {
         EmployeeExceptionEnum exceptionEnum = e.getExceptionEnum();
-        return new ResponseEntity<>(new ApplicationError(exceptionEnum.getErrorMessage(),  exceptionEnum.getErrorCode()), exceptionEnum.getHttpStatus());
+        String message = e.getMessage() != null ? e.getMessage()  : exceptionEnum.getErrorMessage();
+        return new ResponseEntity<>(new ApplicationError(message,  exceptionEnum.getErrorCode()), exceptionEnum.getHttpStatus());
     }
 
 
