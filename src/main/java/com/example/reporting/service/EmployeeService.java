@@ -71,7 +71,7 @@ public class EmployeeService {
     public EmployeeDetails getEmployee(Long id) {
         Employee employee = employeeRepository.findById(id).orElse(null);
         if (employee == null) {
-            throw new EmployeeAppException(EmployeeExceptionEnum.INVALID_EMPLOYEE_ID, null, null);
+            throw new EmployeeAppException(EmployeeExceptionEnum.INVALID_EMPLOYEE_ID);
         }
         EmployeeDetails employeeDetails = new EmployeeDetails();
         BeanUtils.copyProperties(employee, employeeDetails);

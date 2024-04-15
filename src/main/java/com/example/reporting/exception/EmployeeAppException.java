@@ -19,4 +19,8 @@ public class EmployeeAppException extends RuntimeException{
         log.error("EmployeeAppException : {}", message, e);
     }
 
+
+    public EmployeeAppException(EmployeeExceptionEnum exceptionEnum) {
+        this.exceptionEnum = exceptionEnum;
+    }
 }

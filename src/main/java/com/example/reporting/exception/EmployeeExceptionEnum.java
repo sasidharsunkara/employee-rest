@@ -19,5 +19,4 @@ public enum EmployeeExceptionEnum {
         this.httpStatus = httpStatus;
         this.errorMessage = errorMessage;
     }
-
 }
