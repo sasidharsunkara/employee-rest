@@ -36,8 +36,8 @@ public class EmployeeService {
 
     public EmployeeDetails createEmployee(EmployeeDetails employeeDetails) {
 
-        long departmentId = employeeDetails.getDepartmentId();
-        Department department = departmentRepository.findById(departmentId).orElse(null);
+        Long departmentId = employeeDetails.getDepartmentId();
+        Department department = departmentId == null? null : departmentRepository.findById(departmentId).orElse(null);
         if (department == null) {
             throw new RuntimeException("Invalid department Id");
         }
